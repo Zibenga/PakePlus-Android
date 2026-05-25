@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f0f1a">
+  <link rel="manifest" href="manifest.json">
+  <title>日常</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main id="app">
+    <!-- 顶栏 -->
+    <header class="top-bar">
+      <div class="top-bar-left"></div>
+      <div class="top-bar-right">
+        <button id="settingsBtn" class="icon-btn" title="设置">⚙️</button>
+        <button id="themeBtn" class="icon-btn" title="切换主题">🌙</button>
+      </div>
+    </header>
+
+    <!-- 时钟区 -->
+    <section class="clock-section">
+      <div class="clock" id="clock">00:00</div>
+      <div class="date" id="date"></div>
+      <div class="countdown" id="countdown"></div>
+    </section>
+
+    <!-- 功能卡片 -->
+    <div class="cards">
+      <!-- 番茄钟 -->
+      <section class="card tomato-card">
+        <div class="card-header">
+          <span class="card-icon">🍅</span>
+          <span class="card-title">番茄钟</span>
+        </div>
+        <div class="tomato-display" id="tomatoDisplay">25:00</div>
+        <div class="tomato-controls">
+          <button id="tomatoStart" class="btn">开始</button>
+          <button id="tomatoReset" class="btn btn-ghost">重置</button>
+        </div>
+        <div class="tomato-count">今日完成 <strong id="tomatoCount">0</strong> 个</div>
+      </section>
+
+      <!-- 喝水 -->
+      <section class="card water-card">
+        <div class="card-header">
+          <span class="card-icon">💧</span>
+          <span class="card-title">喝水</span>
+        </div>
+        <div class="water-visual" id="waterVisual"></div>
+        <div class="water-info">
+          <span id="waterCurrent">0</span> / 8 杯
+        </div>
+        <button id="waterAdd" class="btn">+1 杯</button>
+      </section>
+
+      <!-- 待办 -->
+      <section class="card todo-card">
+        <div class="card-header">
+          <span class="card-icon">📌</span>
+          <span class="card-title">待办</span>
+        </div>
+        <div class="todo-input-row">
+          <input id="todoInput" type="text" placeholder="写点什么..." maxlength="50">
+          <button id="todoAdd" class="btn btn-sm">+</button>
+        </div>
+        <ul id="todoList" class="todo-list"></ul>
+      </section>
+
+      <!-- 便签 -->
+      <section class="card note-card">
+        <div class="card-header">
+          <span class="card-icon">📝</span>
+          <span class="card-title">便签</span>
+        </div>
+        <textarea id="noteArea" placeholder="随便写点什么..."></textarea>
+      </section>
+    </div>
+  </main>
+
+  <!-- 设置面板 -->
+  <div class="overlay" id="overlay"></div>
+  <div class="settings-panel" id="settingsPanel">
+    <div class="settings-header">
+      <span>设置</span>
+      <button id="settingsClose" class="icon-btn">✕</button>
+    </div>
+    <div class="settings-body">
+      <label class="setting-row">
+        <span class="setting-label">倒计时名称</span>
+        <input id="cfgCountdownLabel" type="text" placeholder="比如：下班、放学、下节课" maxlength="20">
+      </label>
+      <label class="setting-row">
+        <span class="setting-label">目标时间</span>
+        <input id="cfgCountdownTime" type="time" value="18:00">
+      </label>
+      <label class="setting-row">
+        <span class="setting-label">休息日显示</span>
+        <input id="cfgWeekendText" type="text" placeholder="比如：今天不上班、周末啦" maxlength="20">
+      </label>
+      <label class="setting-row">
+        <span class="setting-label">仅工作日倒计时</span>
+        <input id="cfgWorkdayOnly" type="checkbox">
+      </label>
+    </div>
+  </div>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js');
+    }
+  </script>
+  <script src="js/main.js"></script>
+</body>
+</html>
